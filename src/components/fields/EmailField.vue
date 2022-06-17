@@ -1,7 +1,7 @@
 <template>
   <div>
     <TextField
-      :bind-value="defaultValue"
+      :bind-value="bindValue"
       :label="label"
       :default-rules="defaultRules"
       :rules="rules"

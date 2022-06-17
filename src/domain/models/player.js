@@ -17,7 +17,7 @@ export default class Player {
 
   /*seta as propriedades da instância com a validação*/
   create(json = null) {
-    var model = Player.fromJson(json);
+    let model = Player.fromJson(json);
 
     Object.keys(json).forEach((key) => {
       this[key] = model[key];
@@ -25,7 +25,7 @@ export default class Player {
   }
 
   static fromJson(json = null) {
-    var model = new Player(json);
+    let model = new Player(json);
 
     model.id = json["id"] ? parseInt(json["id"]) : "";
     model.name = json["name"] ? json["name"] : "";

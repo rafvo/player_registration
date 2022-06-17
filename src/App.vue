@@ -2,7 +2,7 @@
   <main class="wrapper">
     <v-app>
       <v-main class="mx-5">
-        <PlayerForm />
+        <PlayerForm class="my-5"/>
       </v-main>
     </v-app>
   </main>

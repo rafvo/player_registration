@@ -24,7 +24,6 @@
             :append-icon="appendIcon"
             :label="confirmationLabel"
             :placeholder="confirmationPlaceholder"
-            :required="required"
             :rules="allRules"
             :type="type"
             :vid="confirmationVid"

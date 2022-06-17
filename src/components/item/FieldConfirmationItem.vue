@@ -9,10 +9,12 @@
       <v-list-item-content>
         <v-list-item-title v-text="label"></v-list-item-title>
         <v-list-item-subtitle class="pre-wrap">
-          <p v-if="value">
-            {{ value }}
-          </p>
-          <span v-else> {{ label }} não informado(a) </span>
+          <slot>
+            <p v-if="value">
+              {{ value }}
+            </p>
+            <span v-else> {{ label }} não informado(a) </span>
+          </slot>
         </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>

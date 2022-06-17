@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ValidationObserver ref="observer">
+    <ValidationObserver ref="observer" v-slot="{ invalid }">
       <v-form ref="form">
-        <v-card class="mx-auto my-12">
+        <v-card>
           <v-list-item class="sticky-top border-bottom">
             <v-list-item-content>
               <v-list-item-title class="text-h5 mb-1">
@@ -17,6 +17,8 @@
                 message="Tem Certeza que deseja efetuar o cadastro?"
                 confirm-action="Sim, Desejo me inscrever"
                 :loading="inserting"
+                :validate-before-opening="invalid"
+                @beforeShow="validate"
               >
                 <v-row>
                   <v-col cols="12" sm="12" md="12">
@@ -38,8 +40,9 @@
                     <FieldConfirmationItem
                       label="Data de Nascimento"
                       icon="mdi-cake"
-                      :value="player.birth"
-                    />
+                    >
+                      {{ player.birth | us_to_br_date }}
+                    </FieldConfirmationItem>
                   </v-col>
                 </v-row>
               </ConfirmDialog>
@@ -72,7 +75,7 @@
             </v-row>
 
             <v-row>
-              <v-col cols="12" sm="12" md="12">
+              <v-col cols="12" sm="12" md="9">
                 <EmailField
                   v-model="player.email"
                   :bind-value="player.email"
@@ -80,11 +83,13 @@
                   required-label
                 />
               </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="12" sm="12" md="12">
-                <BirthDayField v-model="player.birth" />
+              <v-col cols="12" sm="12" md="3">
+                <BirthDayField
+                  v-model="player.birth"
+                  :bind-value="player.birth"
+                  rules="required"
+                  required-label
+                />
               </v-col>
             </v-row>
 
@@ -160,6 +165,12 @@ export default {
     },
     reset() {
       this.$refs.form.reset();
+
+      this.$nextTick(() => {
+        this.$refs.observer.reset();
+      });
+
+      this.player.create(new Player());
     },
   },
 };
